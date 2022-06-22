@@ -13,10 +13,13 @@
             <form id="registerForm"  (ngSubmit)="onAddUser()">
                 <div class="mb-4">
                     <label for="email" class="form-label">Nombre Completo</label>
-                    <input  type="text" id="name" name="name" class="form-control" placeholder="Nombre Completo" required  [(ngModel)]="datos.name" #nameLocal="ngModel">
+                    <input  type="text" id="name" name="name" class="form-control" placeholder="Nombre Completo" required pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{2,48}" [(ngModel)]="datos.name" #nameLocal="ngModel">
                     <div  class="alert alert-danger" *ngIf="nameLocal.invalid && (nameLocal.dirty || nameLocal.touched)">
                         <div class="container-error-message" *ngIf="nameLocal.errors?.['required']">
                             El nombre es requerido
+                        </div>
+                        <div class="container-error-message" *ngIf="nameLocal.errors?.['pattern']">
+                            Nombre invalido
                         </div>
                     </div>
                 </div>
@@ -53,7 +56,7 @@
                 </div>
                 
                 <div class="d-grid">
-                    <button id="btnSubmit" type="submit" class="btn btn-primary" [disabled]="emailLocal.invalid || passwordLocal.invalid || nameLocal.invalid">Registrarse</button>
+                    <button id="btnSubmit" type="submit" class="btn btn-primary" [disabled]="(passwordLocal.touched ||emailLocal.touched ||nameLocal.touched) &&(passwordLocal.invalid || emailLocal.invalid || nameLocal.invalid)">Registrarse</button>
                 </div>
                 <div class="my-3">
                     <div *ngIf="isAlert" class="alert alert-danger d-flex align-items-center" role="alert" >
