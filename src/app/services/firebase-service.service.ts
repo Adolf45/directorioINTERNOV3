@@ -11,7 +11,7 @@ export class FirebaseServiceService {
 
   getEmployee(){
 
-    return this.firestore.collection("employees").snapshotChanges();
+    return this.firestore.collection("employees",ref => ref.orderBy('nombre', 'asc')).snapshotChanges();
    }
    getProyect(){
     return this.firestore.collection("proyectos").snapshotChanges();
