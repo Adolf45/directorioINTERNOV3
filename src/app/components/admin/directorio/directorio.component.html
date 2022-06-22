@@ -6,20 +6,21 @@
     <br/>
     <h2>Lista de Empleados</h2>
     <br/>
-    <label style="margin-left:45px; font-size:30px; color:rgb(10, 1, 1)">Filtros</label>
+    <label style="margin-left:45px; font-size:30px; color:rgb(10, 1, 1)">Busqueda</label>
     <br/>
     <div class="mb-3 row">
       <div class="col-sm-10" style="width:30% ; margin-left: 50px;">
-        <input type="text" class="form-control"  placeholder="Search..." [(ngModel)]="filterAdmin" >
+        <input type="text" class="form-control"  placeholder="Busqueda.." [(ngModel)]="filterAdmin" >
       </div>
-    </div>
-    <select class="form-select" aria-label="Default select example" style="width:26%; margin-left:50px" name="filterAdmin" [(ngModel)]="filterAdmin">
-      <option  selected>Proyectos: </option>
-      <option *ngFor="let item2 of collection2.data2" >{{item2.proyecto_asignado2}}</option>
-      
-    </select>
-    <div class="d-grid gap-1 col-2 mx-auto">
-      <button class="btn btn-primary" id="boton" type="button"  (click)="open(content)">Agregar  Empleado</button>
+      <div class="d-grid gap-1 col-2 mx-auto">
+        <button class="btn btn-primary" id="boton" type="button"  (click)="open(content)">Agregar  Empleado</button>
+        
+      </div>
+      <select class="form-select" aria-placeholder="filtro por proyecto" aria-label="Default select example" style="width:26%; margin-right:50px" name="filterAdmin" [(ngModel)]="filterAdmin">
+        <option  selected>Filtro por proyecto: </option>
+        <option *ngFor="let item2 of collection2.data2" >{{item2.proyecto_asignado2}}</option>
+        
+      </select>
     </div>
     
     <br/>
@@ -38,8 +39,8 @@
       <th>Fecha_incorporación</th>
       <th>Fecha_baja</th>
       <th>Responsable_directo</th>  
-      <th>Opciones</th>
       <th>Activo</th>
+      <th>Opciones</th>
 
     </tr>
   </thead>
@@ -56,18 +57,14 @@
     <td>{{item.fecha_incorporacion}}</td>
     <td>{{item.fecha_baja}}</td>
     <td>{{item.responsable_directo}}</td>
-   <td>
-    <button type="button" class="btn btn-primary" (click)="openEditar(content,item)">Editar</button>
-    <br/>
-    <button type="button" class="btn btn-danger" (click)="editarStatus(content2,item)" style="margin-top:5px; ">Cambiar Estatus</button>
-    <br/>
-    <button type="button" class="btn btn-warning" (click)="editarProyecto(content3,item)" style="margin-top:5px; ">Agregar Proyecto</button>
-    <br/>
-  </td>
-  <td>
-    {{item.activo}}
-
-  </td>
+    <td>
+      {{item.activo}} 
+    </td>
+    <td class="d-grid gap-2">
+     <button type="button" class="btn btn-outline-dark" (click)="openEditar(content,item)">Editar</button>
+     <button type="button" class="btn btn-outline-dark" (click)="editarStatus(content2,item)">Cambiar Estatus</button>
+     <button type="button" class="btn btn-outline-dark" (click)="editarProyecto(content3,item)">Agregar Proyecto</button>
+   </td>
 </tr>
   
   
@@ -84,10 +81,7 @@
     <div class="modal-body">
      <div class="form-group">
        <form [formGroup]="employeeForm" >
-          <div class="form-group">
-            <label>Id</label>
-            <input type="number" formControlName="id" class="form-control">
-          </div>
+
           <div class="form-group">
             <label>Nombre</label>
             <input type="text" formControlName="nombre" class="form-control">
@@ -194,7 +188,7 @@
      <div class="form-group">
        <form [formGroup]="proyectForm" >
         <div class="form-group">
-          <label>Nuevo Proyecto asignado</label>
+          <label>Nuevo Cliente</label>
           <input type="text" formControlName="proyecto_asignado2" class="form-control">
         </div>
         </form>
@@ -202,7 +196,7 @@
      </div>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="guardarProyecto()">Guardar Proyecto</button>
+      <button type="button" class="btn btn-outline-dark" (click)="guardarProyecto()">Guardar Cliente</button>
     </div>
   </ng-template>
   
@@ -340,4 +334,6 @@
   
   </div>
 </ng-template>
+
+
 
